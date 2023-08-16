@@ -1,0 +1,128 @@
+MOV BX,0X8210
+
+MOV [BX],
+
+'S'
+
+INC BX
+
+MOV [BX],
+
+'T'
+
+INC BX
+
+MOV [BX],
+
+'A'
+
+INC BX
+
+MOV [BX],
+
+'C'
+
+INC BX
+
+MOV [BX],
+
+'K'
+
+INC BX
+
+MOV [BX],
+
+'S'
+MOV BX,0X8220
+
+MOV [BX],
+
+'A'
+
+INC BX
+
+MOV [BX],
+
+'A'
+
+INC BX
+
+MOV [BX],
+
+'K'
+
+MOV SI,0X8210
+
+MOV DI,0X8220
+
+MOV CX,00H
+
+SAMPLE:
+
+LODSB
+
+CMP AL,[DI]
+
+JZ TRUE
+
+JNZ FALSE
+
+TRUE:
+
+INC DI
+
+INC CL
+
+CMP SI,0X8216
+
+JZ YES
+
+CMP DI,0X8223
+
+JZ YES
+
+JMP SAMPLE
+
+FALSE:
+
+CMP SI,0X8216
+
+JZ NO
+
+CMP DI,0X8223
+
+JZ NO
+
+CMP CL,00H
+
+JZ SAMPLEJNZ PARTIAL
+
+PARTIAL:
+
+MOV CL,00H
+
+MOV DI,0X8220
+
+JMP SAMPLE
+
+YES:
+
+MOV AL,
+
+'Y'
+
+JMP EXIT
+
+NO:
+
+MOV AL,
+
+'N'
+
+JMP EXIT
+
+EXIT:
+
+MOV AH,0EH
+
+INT 10H
